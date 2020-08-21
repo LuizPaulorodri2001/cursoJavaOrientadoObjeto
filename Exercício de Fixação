@@ -1,0 +1,49 @@
+package exerciciofixacao;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Locale;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		String file = "C:\\Users\\dogz3\\Documents\\EclipseProjects\\summary.txt";//TXT PARA LER
+		String fileDirect = "C:\\Users\\dogz3\\Documents\\EclipseProjects";//LOCAL ONDE O TXT FICA SALVO 
+				
+		try(BufferedReader bf = new BufferedReader(new FileReader(file))){//LE O TXT
+			
+			String line = bf.readLine();
+			
+			while(line!=null) {
+				
+				String[] vect = line.split(",");
+				boolean sucess = new File (fileDirect + "\\out").mkdir();//CRIA A NOVA PASTA
+				File summary = new File(fileDirect+"\\summary.txt");//CRIA O NOVO TXT						
+				
+				try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileDirect+"\\out\\summarry.txt",true))){
+						
+					double result = Double.parseDouble(vect[1])*Double.parseDouble(vect[2]); 
+					
+					bw.write(vect[0]+","+String.format("%.2f", result));
+					bw.newLine();
+				
+				}
+				catch(IOException e) {
+					System.out.println("Error: "+e.getMessage());
+				}
+				
+				line=bf.readLine();
+		
+			}
+		}
+		catch(IOException e) {
+			System.out.println("Error: "+e);
+		}
+	}	
+}
