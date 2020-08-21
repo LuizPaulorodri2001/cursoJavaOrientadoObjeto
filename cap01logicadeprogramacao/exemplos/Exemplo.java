@@ -1,4 +1,4 @@
-package lista03estruturarepetitivawhile;
+package exemplos;
 
 import java.util.Scanner;
 
